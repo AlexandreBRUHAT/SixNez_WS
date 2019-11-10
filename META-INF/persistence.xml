@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="persistenceUnit">
+        <class>fr.polytech.sixnez.entities.ActeurEntity</class>
+        <class>fr.polytech.sixnez.entities.CategorieEntity</class>
+        <class>fr.polytech.sixnez.entities.FilmEntity</class>
+        <class>fr.polytech.sixnez.entities.GenreEntity</class>
+        <class>fr.polytech.sixnez.entities.MetierEntity</class>
+        <class>fr.polytech.sixnez.entities.ProfessionEntity</class>
+        <class>fr.polytech.sixnez.entities.RoleEntity</class>
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:mysql://remotemysql.com:3306"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+        </properties>
+    </persistence-unit>
+</persistence>
