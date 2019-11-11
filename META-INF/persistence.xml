@@ -9,6 +9,7 @@
         <class>fr.polytech.sixnez.entities.MetierEntity</class>
         <class>fr.polytech.sixnez.entities.ProfessionEntity</class>
         <class>fr.polytech.sixnez.entities.RoleEntity</class>
+        <class>fr.polytech.sixnez.entities.UserEntity</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://remotemysql.com:3306"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
