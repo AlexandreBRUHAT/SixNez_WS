@@ -33,6 +33,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         } catch (Exception e) {
             SecurityContextHolder.clearContext();
             response.sendError(404, "Not authenticated");
+            return;
         }
 
         filterChain.doFilter(request, response);

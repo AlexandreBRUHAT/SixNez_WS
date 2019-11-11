@@ -65,12 +65,14 @@ public class LoginService {
 
     public void register(String username, String password) {
 
-        userRepository.save(new UserEntity(username, password));
+        UserEntity user = new UserEntity(username, password);
+
+        userRepository.save(user);
     }
 
     public Authentication parseToken(String token) throws JwtException {
 
-        String username = Jwts.parser().parseClaimsJws(token).getBody().getSubject();
+        String username = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody().getSubject();
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
