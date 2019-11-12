@@ -1,9 +1,12 @@
 package fr.polytech.sixnez.controllers;
 
 import fr.polytech.sixnez.dtos.FilmsDTO;
+import fr.polytech.sixnez.dtos.PageDTO;
 import fr.polytech.sixnez.services.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,7 +22,7 @@ public class FilmController {
     }
 
     @GetMapping("/films")
-    public List<FilmsDTO> getFilms() {
-        return filmService.getFilms();
+    public List<FilmsDTO> getFilms(@RequestBody PageDTO page) {
+        return filmService.getFilms(page);
     }
 }
