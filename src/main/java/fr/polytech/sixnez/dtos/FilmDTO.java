@@ -1,13 +1,16 @@
 package fr.polytech.sixnez.dtos;
 
-public class FilmsDTO {
+public class FilmDTO {
+
 
     private String name;
     private String imgURL;
+    private String id;
 
-    public FilmsDTO(String name, String imgURL) {
+    public FilmDTO(String name, String imgURL, String id) {
         this.name = name;
         this.imgURL = imgURL;
+        this.id = id;
     }
 
     public String getName() {
@@ -24,5 +27,13 @@ public class FilmsDTO {
 
     public void setImgURL(String imgURL) {
         this.imgURL = imgURL;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

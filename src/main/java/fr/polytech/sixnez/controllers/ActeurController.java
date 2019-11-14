@@ -3,6 +3,8 @@ package fr.polytech.sixnez.controllers;
 import fr.polytech.sixnez.entities.ActeurEntity;
 import fr.polytech.sixnez.services.ActeurService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,8 +22,8 @@ public class ActeurController {
     }
 
     @GetMapping("/acteurs")
-    public List<ActeurEntity> getActeur(@RequestParam int page) {
+    public ResponseEntity<List<ActeurEntity>> getActeur(@RequestParam int page) {
 
-        return acteurService.getActeurs(page);
+        return new ResponseEntity<>(acteurService.getActeurs(page), HttpStatus.OK);
     }
 }

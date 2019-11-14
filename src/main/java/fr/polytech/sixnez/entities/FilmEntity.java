@@ -1,18 +1,20 @@
 package fr.polytech.sixnez.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "FILM", schema = "YQ3YWoblIF", catalog = "")
+@Table(name = "FILM", schema = "YQ3YWoblIF")
 public class FilmEntity {
     private String idFilm;
     private String titre;
     private Short annee;
     private String image;
+    private Collection<CategorieEntity> categoriesByIdFilm;
 
     @Id
-    @Column(name = "ID_film", nullable = false, length = 10)
+    @Column(name = "ID_film")
     public String getIdFilm() {
         return idFilm;
     }
@@ -22,7 +24,7 @@ public class FilmEntity {
     }
 
     @Basic
-    @Column(name = "Titre", nullable = true, length = 50)
+    @Column(name = "Titre")
     public String getTitre() {
         return titre;
     }
@@ -32,7 +34,7 @@ public class FilmEntity {
     }
 
     @Basic
-    @Column(name = "Annee", nullable = true)
+    @Column(name = "Annee")
     public Short getAnnee() {
         return annee;
     }
@@ -42,7 +44,7 @@ public class FilmEntity {
     }
 
     @Basic
-    @Column(name = "Image", nullable = true, length = 200)
+    @Column(name = "Image")
     public String getImage() {
         return image;
     }
@@ -55,15 +57,24 @@ public class FilmEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FilmEntity that = (FilmEntity) o;
-        return Objects.equals(idFilm, that.idFilm) &&
-                Objects.equals(titre, that.titre) &&
-                Objects.equals(annee, that.annee) &&
-                Objects.equals(image, that.image);
+        FilmEntity entity = (FilmEntity) o;
+        return Objects.equals(idFilm, entity.idFilm) &&
+                Objects.equals(titre, entity.titre) &&
+                Objects.equals(annee, entity.annee) &&
+                Objects.equals(image, entity.image);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(idFilm, titre, annee, image);
+    }
+
+    @OneToMany(mappedBy = "filmByIdFilm")
+    public Collection<CategorieEntity> getCategoriesByIdFilm() {
+        return categoriesByIdFilm;
+    }
+
+    public void setCategoriesByIdFilm(Collection<CategorieEntity> categoriesByIdFilm) {
+        this.categoriesByIdFilm = categoriesByIdFilm;
     }
 }

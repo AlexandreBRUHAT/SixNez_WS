@@ -4,11 +4,12 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "CATEGORIE", schema = "YQ3YWoblIF", catalog = "")
+@Table(name = "CATEGORIE", schema = "YQ3YWoblIF")
 @IdClass(CategorieEntityPK.class)
 public class CategorieEntity {
     private String idFilm;
     private String genre;
+    private FilmEntity filmByIdFilm;
 
     @Id
     @Column(name = "ID_film", nullable = false, length = 10)
@@ -42,5 +43,15 @@ public class CategorieEntity {
     @Override
     public int hashCode() {
         return Objects.hash(idFilm, genre);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "ID_film", referencedColumnName = "ID_film", nullable = false, insertable = false, updatable = false)
+    public FilmEntity getFilmByIdFilm() {
+        return filmByIdFilm;
+    }
+
+    public void setFilmByIdFilm(FilmEntity filmByIdFilm) {
+        this.filmByIdFilm = filmByIdFilm;
     }
 }

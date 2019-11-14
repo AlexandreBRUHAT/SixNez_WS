@@ -1,12 +1,11 @@
 package fr.polytech.sixnez.controllers;
 
 import fr.polytech.sixnez.services.LoginService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("/login")
+@RestController
 public class LoginController {
 
     private LoginService loginService;
@@ -20,10 +19,10 @@ public class LoginController {
         return loginService.login(username, password);
     }
 
-    @PutMapping("/register")
-    public String register(@RequestParam String username, @RequestParam String password) {
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestParam String username, @RequestParam String password) {
         loginService.register(username, password);
 
-        return "OK";
+        return new ResponseEntity<String>("You're registered.", HttpStatus.OK);
     }
 }

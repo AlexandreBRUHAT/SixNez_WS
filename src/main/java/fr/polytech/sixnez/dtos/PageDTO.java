@@ -4,10 +4,15 @@ public class PageDTO {
 
     private int pageNumber;
     private int pageSize;
+    private FilterDTO filter;
 
-    public PageDTO(int page, int pageSize) {
-        this.pageNumber = page;
+    public PageDTO(int pageNumber, int pageSize, FilterDTO filter) {
+        this.pageNumber = pageNumber;
         this.pageSize = pageSize;
+        this.filter = filter;
+    }
+
+    public PageDTO() {
     }
 
     public int getPageNumber() {
@@ -24,5 +29,13 @@ public class PageDTO {
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public FilterDTO getFilter() {
+        return filter;
+    }
+
+    public void setFilter(FilterDTO filter) {
+        this.filter = filter;
     }
 }
