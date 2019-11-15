@@ -16,7 +16,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     @ExceptionHandler(SNException.class)
     public final ResponseEntity<ErrorDetails>  handleDBException(SNException ex, WebRequest request) {
-        ErrorDetails e = new ErrorDetails(Date.from(Instant.now()), ex.getDetailledCode(), ex.getMessage());
+        ErrorDetails e = new ErrorDetails(Date.from(Instant.now()), ex.getSpecialCode(), ex.getMessage());
         return new ResponseEntity<ErrorDetails>(e, ex.getStatusCode());
     }
 }

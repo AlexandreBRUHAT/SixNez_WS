@@ -5,19 +5,19 @@ import org.springframework.http.HttpStatus;
 public class SNException extends RuntimeException {
 
     private HttpStatus statusCode;
-    private int detailledCode;
+    private SpecialCode specialCode;
 
-    public SNException(String error, HttpStatus statusCode, int detailledCode) {
+    public SNException(String error, HttpStatus statusCode, SpecialCode code) {
         super(error);
         this.statusCode = statusCode;
-        this.detailledCode = detailledCode;
+        this.specialCode = code;
     }
 
     public HttpStatus getStatusCode() {
         return statusCode;
     }
 
-    public int getDetailledCode() {
-        return detailledCode;
+    public SpecialCode getSpecialCode() {
+        return specialCode;
     }
 }

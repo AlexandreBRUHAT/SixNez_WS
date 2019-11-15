@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,8 +27,8 @@ public class FilmController {
         return new ResponseEntity<>(filmService.getFilms(page), HttpStatus.OK);
     }
 
-    @GetMapping("/film")
-    public ResponseEntity<FilmDetailledDTO> getFilms(@RequestParam String id) {
+    @GetMapping("/films/{id}")
+    public ResponseEntity<FilmDetailledDTO> getFilm(@PathVariable("id") String id) {
         return new ResponseEntity<>(filmService.getFilm(id), HttpStatus.OK);
     }
 }

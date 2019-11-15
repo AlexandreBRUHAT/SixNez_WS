@@ -15,8 +15,8 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password) {
-        return loginService.login(username, password);
+    public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
+        return new ResponseEntity<String>(loginService.login(username, password), HttpStatus.OK);
     }
 
     @PostMapping("/register")

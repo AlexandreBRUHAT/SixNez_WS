@@ -2,6 +2,7 @@ package fr.polytech.sixnez.services;
 
 import fr.polytech.sixnez.entities.UserEntity;
 import fr.polytech.sixnez.exceptions.SNException;
+import fr.polytech.sixnez.exceptions.SpecialCode;
 import fr.polytech.sixnez.properties.AppProperties;
 import fr.polytech.sixnez.repositories.UserRepository;
 import fr.polytech.sixnez.security.CustomUserDetails;
@@ -47,6 +48,8 @@ public class LoginService {
         algorithm = SignatureAlgorithm.HS256;
     }
 
+    // METHODS FOR CONTROLLER
+
     public String login(String username, String password) {
 
         UserEntity savedUser = userRepository.findByUsernameAndPassword(username, password);
@@ -58,15 +61,20 @@ public class LoginService {
                     .setExpiration(Date.from(Instant.now().plusMillis(expirationPlus)))
                     .compact();
         } else {
-            throw new SNException("Bad credentials !", HttpStatus.BAD_REQUEST, 1);
+            throw new SNException("Bad credentials !", HttpStatus.BAD_REQUEST, SpecialCode.LOGIN_BAD_CREDENTIALS);
         }
     }
+
+
+
+    // METHODS FOR SECURITY
+
 
     public void register(String username, String password) {
 
 
         if (userRepository.findByUsername(username) != null) {
-            throw new SNException("Username already exists !", HttpStatus.BAD_REQUEST, 0);
+            throw new SNException("Username already exists !", HttpStatus.BAD_REQUEST, SpecialCode.LOGIN_USERNAME_ALREADY_EXISTS);
         }
 
         UserEntity user = new UserEntity(username, password);
