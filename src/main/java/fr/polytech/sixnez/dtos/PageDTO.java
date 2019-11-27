@@ -6,7 +6,7 @@ public class PageDTO {
     private int pageSize;
     private FilterDTO filter;
 
-    public PageDTO(int pageNumber, int pageSize, FilterDTO filter) {
+    public PageDTO(int pageNumber, int pageSize, FilterFilmDTO filter) {
         this.pageNumber = pageNumber;
         this.pageSize = pageSize;
         this.filter = filter;
@@ -35,7 +35,7 @@ public class PageDTO {
         return filter;
     }
 
-    public void setFilter(FilterDTO filter) {
+    public void setFilter(FilterFilmDTO filter) {
         this.filter = filter;
     }
 }

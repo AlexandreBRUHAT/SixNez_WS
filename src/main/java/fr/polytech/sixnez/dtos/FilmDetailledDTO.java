@@ -6,13 +6,13 @@ public class FilmDetailledDTO {
 
     private String title;
     private String imgURL;
-    private List<ActeurDTO> acteurs;
+    private List<ActeurFilmDTO> acteurs;
     private List<String> categories;
 
     public FilmDetailledDTO() {
     }
 
-    public FilmDetailledDTO(String title, String imgURL, List<ActeurDTO> acteurs, List<String> categories) {
+    public FilmDetailledDTO(String title, String imgURL, List<ActeurFilmDTO> acteurs, List<String> categories) {
         this.title = title;
         this.imgURL = imgURL;
         this.acteurs = acteurs;
@@ -35,11 +35,11 @@ public class FilmDetailledDTO {
         this.imgURL = imgURL;
     }
 
-    public List<ActeurDTO> getActeurs() {
+    public List<ActeurFilmDTO> getActeurs() {
         return acteurs;
     }
 
-    public void setActeurs(List<ActeurDTO> acteurs) {
+    public void setActeurs(List<ActeurFilmDTO> acteurs) {
         this.acteurs = acteurs;
     }
 

@@ -22,7 +22,7 @@ public class FilmController {
         this.filmService = filmService;
     }
 
-    @GetMapping("/films")
+    @GetMapping(value = "/films", headers = "Accept=application/json")
     public ResponseEntity<List<FilmDTO>> getFilms(@RequestBody PageDTO page) {
         return new ResponseEntity<>(filmService.getFilms(page), HttpStatus.OK);
     }

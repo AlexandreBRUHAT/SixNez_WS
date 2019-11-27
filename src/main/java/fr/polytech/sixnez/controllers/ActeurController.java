@@ -1,5 +1,6 @@
 package fr.polytech.sixnez.controllers;
 
+import fr.polytech.sixnez.dtos.PageDTO;
 import fr.polytech.sixnez.entities.ActeurEntity;
 import fr.polytech.sixnez.services.ActeurService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController("/acteurs")
@@ -22,8 +24,14 @@ public class ActeurController {
     }
 
     @GetMapping("/acteurs")
-    public ResponseEntity<List<ActeurEntity>> getActeur(@RequestParam int page) {
+    public ResponseEntity<List<ActeurEntity>> getActeurs(@RequestParam PageDTO page) {
 
         return new ResponseEntity<>(acteurService.getActeurs(page), HttpStatus.OK);
+    }
+
+    @GetMapping("/acteurs/{id}")
+    public ResponseEntity<ActeurEntity> getActeur(@PathParam("id") int id) {
+
+        return new ResponseEntity<>(acteurService.getActeur(id), HttpStatus.OK);
     }
 }

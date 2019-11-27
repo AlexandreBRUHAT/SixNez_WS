@@ -1,6 +1,6 @@
 package fr.polytech.sixnez.specifications;
 
-import fr.polytech.sixnez.dtos.FilterDTO;
+import fr.polytech.sixnez.dtos.FilterFilmDTO;
 import fr.polytech.sixnez.entities.CategorieEntity;
 import fr.polytech.sixnez.entities.FilmEntity;
 import fr.polytech.sixnez.entities.FilmEntity_;
@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class FilmSpecification {
 
-    public Specification<FilmEntity> getFilmsByFilters(FilterDTO filter) {
+    public Specification<FilmEntity> getFilmsByFilters(FilterFilmDTO filter) {
         return new Specification<FilmEntity>() {
             @Override
             public Predicate toPredicate(Root<FilmEntity> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {

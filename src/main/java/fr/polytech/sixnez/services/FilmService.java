@@ -1,9 +1,6 @@
 package fr.polytech.sixnez.services;
 
-import fr.polytech.sixnez.dtos.ActeurDTO;
-import fr.polytech.sixnez.dtos.FilmDTO;
-import fr.polytech.sixnez.dtos.FilmDetailledDTO;
-import fr.polytech.sixnez.dtos.PageDTO;
+import fr.polytech.sixnez.dtos.*;
 import fr.polytech.sixnez.entities.ActeurEntity;
 import fr.polytech.sixnez.entities.CategorieEntity;
 import fr.polytech.sixnez.entities.FilmEntity;
@@ -54,7 +51,7 @@ public class FilmService {
     public List<FilmDTO> getFilms(PageDTO page) {
         Pageable requestedPage = PageRequest.of(page.getPageNumber(), page.getPageSize());
 
-        Page<FilmEntity> entities = filmRepository.findAll(filmSpecification.getFilmsByFilters(page.getFilter()), requestedPage);
+        Page<FilmEntity> entities = filmRepository.findAll(filmSpecification.getFilmsByFilters((FilterFilmDTO)page.getFilter()), requestedPage);
 
         return entities.get().map(filmEntity -> new FilmDTO(filmEntity.getTitre(), filmEntity.getImage(), filmEntity.getIdFilm())).collect(Collectors.toList());
     }
@@ -79,10 +76,10 @@ public class FilmService {
         List<RoleEntity> roleEntities = roleRepository.findByIdFilm(id);
         List<ActeurEntity> acteurEntities = roleEntities.stream().map(roleEntity -> roleEntity.getActeurByIdActeur()).collect(Collectors.toList());
 
-        List<ActeurDTO> acteursDTO = acteurEntities.stream().map(acteurEntity -> new ActeurDTO(acteurEntity.getIdActeur(), acteurEntity.getNomPrenom(), (acteurEntity.getNaissance() == null ? -1 : acteurEntity.getNaissance()), (acteurEntity.getMort() == null ? -1 : acteurEntity.getMort()))).collect(Collectors.toList());
-        acteursDTO.forEach(acteurDTO -> {
-            List<String> metier = professionRepository.findByIdActeur(acteurDTO.getId()).stream().map(professionEntity -> professionEntity.getMetier()).collect(Collectors.toList());
-            acteurDTO.setMetier(metier);
+        List<ActeurFilmDTO> acteursDTO = acteurEntities.stream().map(acteurEntity -> new ActeurFilmDTO(acteurEntity.getIdActeur(), acteurEntity.getNomPrenom(), (acteurEntity.getNaissance() == null ? -1 : acteurEntity.getNaissance()), (acteurEntity.getMort() == null ? -1 : acteurEntity.getMort()))).collect(Collectors.toList());
+        acteursDTO.forEach(acteurFilmDTO -> {
+            List<String> metier = professionRepository.findByIdActeur(acteurFilmDTO.getId()).stream().map(professionEntity -> professionEntity.getMetier()).collect(Collectors.toList());
+            acteurFilmDTO.setMetier(metier);
         });
 
         film.setActeurs(acteursDTO);
