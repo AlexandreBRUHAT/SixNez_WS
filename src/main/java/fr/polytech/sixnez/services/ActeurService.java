@@ -5,11 +5,14 @@ import fr.polytech.sixnez.dtos.ActeurDetailledDTO;
 import fr.polytech.sixnez.dtos.FilmDTO;
 import fr.polytech.sixnez.entities.ActeurEntity;
 import fr.polytech.sixnez.entities.FilmEntity;
+import fr.polytech.sixnez.exceptions.SNException;
+import fr.polytech.sixnez.exceptions.SpecialCode;
 import fr.polytech.sixnez.repositories.ActeurRepository;
 import fr.polytech.sixnez.specifications.ActeurSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,6 +41,10 @@ public class ActeurService {
     public ActeurDetailledDTO getActeur(String id) {
 
         ActeurEntity entity = acteurRepository.findByIdActeur(id);
+
+        if (entity == null) {
+            throw new SNException("Actor not found.", HttpStatus.NOT_FOUND, SpecialCode.ACTOR_NOT_FOUND);
+        }
 
         List<FilmEntity> films = entity.getRolesByIdActeur().stream().map(roleEntity -> roleEntity.getFilmByIdFilm()).collect(Collectors.toList());
 
