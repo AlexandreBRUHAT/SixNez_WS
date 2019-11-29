@@ -5,16 +5,17 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "FILM", schema = "YQ3YWoblIF")
+@Table(name = "FILM", schema = "YQ3YWoblIF", catalog = "")
 public class FilmEntity {
     private String idFilm;
     private String titre;
     private Short annee;
     private String image;
     private Collection<CategorieEntity> categoriesByIdFilm;
+    private Collection<RoleEntity> rolesByIdFilm;
 
     @Id
-    @Column(name = "ID_film")
+    @Column(name = "ID_film" , insertable=false, updatable=false)
     public String getIdFilm() {
         return idFilm;
     }
@@ -76,5 +77,14 @@ public class FilmEntity {
 
     public void setCategoriesByIdFilm(Collection<CategorieEntity> categoriesByIdFilm) {
         this.categoriesByIdFilm = categoriesByIdFilm;
+    }
+
+    @OneToMany(mappedBy = "filmByIdFilm")
+    public Collection<RoleEntity> getRolesByIdFilm() {
+        return rolesByIdFilm;
+    }
+
+    public void setRolesByIdFilm(Collection<RoleEntity> rolesByIdFilm) {
+        this.rolesByIdFilm = rolesByIdFilm;
     }
 }

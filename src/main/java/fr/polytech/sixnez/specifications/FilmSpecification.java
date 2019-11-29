@@ -1,6 +1,5 @@
 package fr.polytech.sixnez.specifications;
 
-import fr.polytech.sixnez.dtos.FilterDTO;
 import fr.polytech.sixnez.entities.CategorieEntity;
 import fr.polytech.sixnez.entities.FilmEntity;
 import fr.polytech.sixnez.entities.FilmEntity_;
@@ -15,27 +14,23 @@ import java.util.List;
 @Service
 public class FilmSpecification {
 
-    public Specification<FilmEntity> getFilmsByFilters(FilterDTO filter) {
+    public Specification<FilmEntity> getFilmsByFilters(String genre, String like, int annee) {
         return new Specification<FilmEntity>() {
             @Override
             public Predicate toPredicate(Root<FilmEntity> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 List<Predicate> predicates = new ArrayList<>();
 
-                if(filter == null) {
-                    return null;
+                if(like != null && !like.isEmpty()) {
+                    predicates.add(criteriaBuilder.like(root.get(FilmEntity_.titre), "%" + like + "%"));
                 }
 
-                if(filter.getLikeTitre() != null && !filter.getLikeTitre().isEmpty()) {
-                    predicates.add(criteriaBuilder.like(root.get(FilmEntity_.titre), "%" + filter.getLikeTitre() + "%"));
+                if(annee != 0) {
+                    predicates.add(criteriaBuilder.equal(root.get(FilmEntity_.annee), annee));
                 }
 
-                if(filter.getAnnee() != 0) {
-                    predicates.add(criteriaBuilder.equal(root.get(FilmEntity_.annee), filter.getAnnee()));
-                }
-
-                if(filter.getGenres() != null && filter.getGenres() != null) {
+                if(genre != null && genre != null) {
                     Join<FilmEntity, CategorieEntity> genres = root.join(FilmEntity_.CATEGORIES_BY_ID_FILM);
-                    predicates.add(genres.get(GenreEntity_.GENRE).in(filter.getGenres()));
+                    predicates.add(genres.get(GenreEntity_.GENRE).in(genre));
                 }
 
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));

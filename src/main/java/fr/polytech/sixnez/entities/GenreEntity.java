@@ -1,15 +1,14 @@
 package fr.polytech.sixnez.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "GENRE", schema = "YQ3YWoblIF", catalog = "")
 public class GenreEntity {
     private String genre;
+    private Collection<CategorieEntity> categoriesByGenre;
 
     @Id
     @Column(name = "Genre", nullable = false, length = 20)
@@ -32,5 +31,14 @@ public class GenreEntity {
     @Override
     public int hashCode() {
         return Objects.hash(genre);
+    }
+
+    @OneToMany(mappedBy = "genreByGenre")
+    public Collection<CategorieEntity> getCategoriesByGenre() {
+        return categoriesByGenre;
+    }
+
+    public void setCategoriesByGenre(Collection<CategorieEntity> categoriesByGenre) {
+        this.categoriesByGenre = categoriesByGenre;
     }
 }

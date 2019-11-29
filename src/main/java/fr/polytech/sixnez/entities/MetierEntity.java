@@ -1,15 +1,14 @@
 package fr.polytech.sixnez.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "METIER", schema = "YQ3YWoblIF", catalog = "")
 public class MetierEntity {
     private String metier;
+    private Collection<ProfessionEntity> professionsByMetier;
 
     @Id
     @Column(name = "Metier", nullable = false, length = 30)
@@ -32,5 +31,14 @@ public class MetierEntity {
     @Override
     public int hashCode() {
         return Objects.hash(metier);
+    }
+
+    @OneToMany(mappedBy = "metierByMetier")
+    public Collection<ProfessionEntity> getProfessionsByMetier() {
+        return professionsByMetier;
+    }
+
+    public void setProfessionsByMetier(Collection<ProfessionEntity> professionsByMetier) {
+        this.professionsByMetier = professionsByMetier;
     }
 }
