@@ -1,6 +1,7 @@
 package fr.polytech.sixnez.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -10,6 +11,8 @@ public class ActeurEntity {
     private String nomPrenom;
     private Short naissance;
     private Short mort;
+    private Collection<ProfessionEntity> professionsByIdActeur;
+    private Collection<RoleEntity> rolesByIdActeur;
 
     @Id
     @Column(name = "ID_acteur", nullable = false, length = 10)
@@ -65,5 +68,23 @@ public class ActeurEntity {
     @Override
     public int hashCode() {
         return Objects.hash(idActeur, nomPrenom, naissance, mort);
+    }
+
+    @OneToMany(mappedBy = "acteurByIdActeur")
+    public Collection<ProfessionEntity> getProfessionsByIdActeur() {
+        return professionsByIdActeur;
+    }
+
+    public void setProfessionsByIdActeur(Collection<ProfessionEntity> professionsByIdActeur) {
+        this.professionsByIdActeur = professionsByIdActeur;
+    }
+
+    @OneToMany(mappedBy = "acteurByIdActeur")
+    public Collection<RoleEntity> getRolesByIdActeur() {
+        return rolesByIdActeur;
+    }
+
+    public void setRolesByIdActeur(Collection<RoleEntity> rolesByIdActeur) {
+        this.rolesByIdActeur = rolesByIdActeur;
     }
 }

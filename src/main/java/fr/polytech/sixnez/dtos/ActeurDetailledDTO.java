@@ -6,15 +6,15 @@ public class ActeurDetailledDTO {
 
     private String id;
     private String nomPrenom;
-    private int naissance;
-    private int mort;
+    private Short naissance;
+    private Short mort;
     private List<String> metier;
     private List<FilmDTO> filmDTOS;
 
     public ActeurDetailledDTO() {
     }
 
-    public ActeurDetailledDTO(String id, String nomPrenom, int naissance, int mort, List<String> metier, List<FilmDTO> filmDTOS) {
+    public ActeurDetailledDTO(String id, String nomPrenom, Short naissance, Short mort, List<String> metier, List<FilmDTO> filmDTOS) {
         this.id = id;
         this.nomPrenom = nomPrenom;
         this.naissance = naissance;
@@ -39,19 +39,19 @@ public class ActeurDetailledDTO {
         this.nomPrenom = nomPrenom;
     }
 
-    public int getNaissance() {
+    public Short getNaissance() {
         return naissance;
     }
 
-    public void setNaissance(int naissance) {
+    public void setNaissance(Short naissance) {
         this.naissance = naissance;
     }
 
-    public int getMort() {
+    public Short getMort() {
         return mort;
     }
 
-    public void setMort(int mort) {
+    public void setMort(Short mort) {
         this.mort = mort;
     }
 

@@ -48,10 +48,9 @@ public class FilmService {
         this.professionRepository = professionRepository;
     }
 
-    public List<FilmDTO> getFilms(PageDTO page) {
-        Pageable requestedPage = PageRequest.of(page.getPageNumber(), page.getPageSize());
+    public List<FilmDTO> getFilms(Pageable page, String genre, String like, int annee) {
 
-        Page<FilmEntity> entities = filmRepository.findAll(filmSpecification.getFilmsByFilters((FilterFilmDTO)page.getFilter()), requestedPage);
+        Page<FilmEntity> entities = filmRepository.findAll(filmSpecification.getFilmsByFilters(genre, like, annee), page);
 
         return entities.get().map(filmEntity -> new FilmDTO(filmEntity.getTitre(), filmEntity.getImage(), filmEntity.getIdFilm())).collect(Collectors.toList());
     }
@@ -76,7 +75,7 @@ public class FilmService {
         List<RoleEntity> roleEntities = roleRepository.findByIdFilm(id);
         List<ActeurEntity> acteurEntities = roleEntities.stream().map(roleEntity -> roleEntity.getActeurByIdActeur()).collect(Collectors.toList());
 
-        List<ActeurFilmDTO> acteursDTO = acteurEntities.stream().map(acteurEntity -> new ActeurFilmDTO(acteurEntity.getIdActeur(), acteurEntity.getNomPrenom(), (acteurEntity.getNaissance() == null ? -1 : acteurEntity.getNaissance()), (acteurEntity.getMort() == null ? -1 : acteurEntity.getMort()))).collect(Collectors.toList());
+        List<ActeurFilmDTO> acteursDTO = acteurEntities.stream().map(acteurEntity -> new ActeurFilmDTO(acteurEntity.getIdActeur(), acteurEntity.getNomPrenom())).collect(Collectors.toList());
         acteursDTO.forEach(acteurFilmDTO -> {
             List<String> metier = professionRepository.findByIdActeur(acteurFilmDTO.getId()).stream().map(professionEntity -> professionEntity.getMetier()).collect(Collectors.toList());
             acteurFilmDTO.setMetier(metier);

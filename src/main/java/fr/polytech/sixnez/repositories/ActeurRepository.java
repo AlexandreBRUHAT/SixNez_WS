@@ -12,5 +12,5 @@ import java.util.List;
 @Repository
 public interface ActeurRepository extends JpaRepository<ActeurEntity, String>, JpaSpecificationExecutor<ActeurEntity> {
 
-    ActeurEntity findByIdActeur(int id);
+    ActeurEntity findByIdActeur(String id);
 }

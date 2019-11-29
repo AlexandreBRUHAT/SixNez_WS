@@ -10,6 +10,7 @@ public class CategorieEntity {
     private String idFilm;
     private String genre;
     private FilmEntity filmByIdFilm;
+    private GenreEntity genreByGenre;
 
     @Id
     @Column(name = "ID_film", nullable = false, length = 10)
@@ -53,5 +54,15 @@ public class CategorieEntity {
 
     public void setFilmByIdFilm(FilmEntity filmByIdFilm) {
         this.filmByIdFilm = filmByIdFilm;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Genre", referencedColumnName = "Genre", nullable = false, insertable = false, updatable = false)
+    public GenreEntity getGenreByGenre() {
+        return genreByGenre;
+    }
+
+    public void setGenreByGenre(GenreEntity genreByGenre) {
+        this.genreByGenre = genreByGenre;
     }
 }

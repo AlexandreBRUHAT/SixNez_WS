@@ -5,26 +5,20 @@ import java.util.List;
 public class ActeurFilmDTO {
     private String id;
     private String nomPrenom;
-    private int naissance;
-    private int mort;
     private List<String> metier;
 
     public ActeurFilmDTO() {
     }
 
-    public ActeurFilmDTO(String id, String nomPrenom, int naissance, int mort, List<String> metier) {
+    public ActeurFilmDTO(String id, String nomPrenom, List<String> metier) {
         this.id = id;
         this.nomPrenom = nomPrenom;
-        this.naissance = naissance;
-        this.mort = mort;
         this.metier = metier;
     }
 
-    public ActeurFilmDTO(String id, String nomPrenom, int naissance, int mort) {
+    public ActeurFilmDTO(String id, String nomPrenom) {
         this.id = id;
         this.nomPrenom = nomPrenom;
-        this.naissance = naissance;
-        this.mort = mort;
     }
 
     public String getNomPrenom() {
@@ -33,22 +27,6 @@ public class ActeurFilmDTO {
 
     public void setNomPrenom(String nomPrenom) {
         this.nomPrenom = nomPrenom;
-    }
-
-    public int getNaissance() {
-        return naissance;
-    }
-
-    public void setNaissance(int naissance) {
-        this.naissance = naissance;
-    }
-
-    public int getMort() {
-        return mort;
-    }
-
-    public void setMort(int mort) {
-        this.mort = mort;
     }
 
     public List<String> getMetier() {
