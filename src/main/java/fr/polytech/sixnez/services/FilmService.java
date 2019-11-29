@@ -66,9 +66,10 @@ public class FilmService {
 
         FilmDetailledDTO film = new FilmDetailledDTO();
 
-        // TODO: C'est clairement too much le Optionnal pour faire ça.
+        // TODO: C'est clairement too much le Optionnal pour faire ça. Mais c'est la méthode par défaut qui retourne un Optional
         film.setTitle(filmEntity.orElse(new FilmEntity()).getTitre());
         film.setImgURL(filmEntity.orElse(new FilmEntity()).getImage());
+        film.setAnnee(filmEntity.orElse(new FilmEntity()).getAnnee());
 
         film.setCategories(categorieEntities.stream().map(categorieEntity -> categorieEntity.getGenre()).collect(Collectors.toList()));
 

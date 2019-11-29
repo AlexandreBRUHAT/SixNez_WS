@@ -6,17 +6,27 @@ public class FilmDetailledDTO {
 
     private String title;
     private String imgURL;
+    private Short annee;
     private List<ActeurFilmDTO> acteurs;
     private List<String> categories;
 
     public FilmDetailledDTO() {
     }
 
-    public FilmDetailledDTO(String title, String imgURL, List<ActeurFilmDTO> acteurs, List<String> categories) {
+    public FilmDetailledDTO(String title, String imgURL, Short annee, List<ActeurFilmDTO> acteurs, List<String> categories) {
         this.title = title;
         this.imgURL = imgURL;
+        this.annee = annee;
         this.acteurs = acteurs;
         this.categories = categories;
+    }
+
+    public Short getAnnee() {
+        return annee;
+    }
+
+    public void setAnnee(Short annee) {
+        this.annee = annee;
     }
 
     public String getTitle() {
