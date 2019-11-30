@@ -62,7 +62,8 @@ public class PictureService {
             }
 
             if (bufferLine.startsWith()) {
-                return bufferLine.substring(5, bufferLine.length() - 4);
+                String idFlat = bufferLine.substring(5, bufferLine.length() - 4);
+                return idFlat.substring(0, idFlat.lastIndexOf("@") + 1);
             } else {
                 return "";
             }
