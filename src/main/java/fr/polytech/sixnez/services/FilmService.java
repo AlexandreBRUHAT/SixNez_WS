@@ -36,23 +36,27 @@ public class FilmService {
     private ProfessionRepository professionRepository;
     @Autowired
     private FilmSpecification filmSpecification;
+    @Autowired
+    private FavsService favsService;
 
     public FilmService(FilmRepository filmRepository,
                        CategorieRepository categorieRepository,
                        RoleRepository roleRepository,
                        ProfessionRepository professionRepository,
-                       FilmSpecification filmSpecification) {
+                       FilmSpecification filmSpecification,
+                       FavsService favsService) {
         this.filmRepository = filmRepository;
         this.categorieRepository = categorieRepository;
         this.roleRepository = roleRepository;
         this.professionRepository = professionRepository;
+        this.favsService = favsService;
     }
 
     public List<FilmDTO> getFilms(Pageable page, String genre, String like, int annee) {
 
         Page<FilmEntity> entities = filmRepository.findAll(filmSpecification.getFilmsByFilters(genre, like, annee), page);
 
-        return entities.get().map(filmEntity -> new FilmDTO(filmEntity.getTitre(), filmEntity.getImage(), filmEntity.getIdFilm())).collect(Collectors.toList());
+        return entities.get().map(filmEntity -> new FilmDTO(filmEntity.getTitre(), filmEntity.getImage(), filmEntity.getIdFilm(), favsService.isFav(filmEntity.getIdFilm()), filmEntity.getAnnee())).collect(Collectors.toList());
     }
 
     public FilmDetailledDTO getFilm(String id) {
@@ -70,6 +74,7 @@ public class FilmService {
         film.setTitle(filmEntity.orElse(new FilmEntity()).getTitre());
         film.setImgURL(filmEntity.orElse(new FilmEntity()).getImage());
         film.setAnnee(filmEntity.orElse(new FilmEntity()).getAnnee());
+        film.setFav(favsService.isFav(filmEntity.orElse(new FilmEntity()).getIdFilm()));
 
         film.setCategories(categorieEntities.stream().map(categorieEntity -> categorieEntity.getGenre()).collect(Collectors.toList()));
 

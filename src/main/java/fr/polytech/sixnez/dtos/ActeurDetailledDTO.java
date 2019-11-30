@@ -9,12 +9,12 @@ public class ActeurDetailledDTO {
     private Short naissance;
     private Short mort;
     private List<String> metier;
-    private List<FilmDTO> filmDTOS;
+    private List<FilmActeurDTO> filmDTOS;
 
     public ActeurDetailledDTO() {
     }
 
-    public ActeurDetailledDTO(String id, String nomPrenom, Short naissance, Short mort, List<String> metier, List<FilmDTO> filmDTOS) {
+    public ActeurDetailledDTO(String id, String nomPrenom, Short naissance, Short mort, List<String> metier, List<FilmActeurDTO> filmDTOS) {
         this.id = id;
         this.nomPrenom = nomPrenom;
         this.naissance = naissance;
@@ -63,11 +63,11 @@ public class ActeurDetailledDTO {
         this.metier = metier;
     }
 
-    public List<FilmDTO> getFilmDTOS() {
+    public List<FilmActeurDTO> getFilmDTOS() {
         return filmDTOS;
     }
 
-    public void setFilmDTOS(List<FilmDTO> filmDTOS) {
+    public void setFilmDTOS(List<FilmActeurDTO> filmDTOS) {
         this.filmDTOS = filmDTOS;
     }
 }

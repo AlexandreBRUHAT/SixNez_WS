@@ -2,6 +2,7 @@ package fr.polytech.sixnez.services;
 
 import fr.polytech.sixnez.dtos.ActeurDTO;
 import fr.polytech.sixnez.dtos.ActeurDetailledDTO;
+import fr.polytech.sixnez.dtos.FilmActeurDTO;
 import fr.polytech.sixnez.dtos.FilmDTO;
 import fr.polytech.sixnez.entities.ActeurEntity;
 import fr.polytech.sixnez.entities.FilmEntity;
@@ -48,11 +49,13 @@ public class ActeurService {
 
         List<FilmEntity> films = entity.getRolesByIdActeur().stream().map(roleEntity -> roleEntity.getFilmByIdFilm()).collect(Collectors.toList());
 
+
+
         return new ActeurDetailledDTO(entity.getIdActeur(),
                 entity.getNomPrenom(),
                 entity.getNaissance(),
                 entity.getMort(),
                 entity.getProfessionsByIdActeur().stream().map(professionEntity -> professionEntity.getMetier()).collect(Collectors.toList()),
-                films.stream().map(filmEntity -> new FilmDTO(filmEntity.getTitre(), filmEntity.getImage(), filmEntity.getIdFilm())).collect(Collectors.toList()));
+                films.stream().map(filmEntity -> new FilmActeurDTO(filmEntity.getTitre(), filmEntity.getIdFilm())).collect(Collectors.toList()));
     }
 }

@@ -9,16 +9,18 @@ public class FilmDetailledDTO {
     private Short annee;
     private List<ActeurFilmDTO> acteurs;
     private List<String> categories;
+    private Boolean fav;
 
     public FilmDetailledDTO() {
     }
 
-    public FilmDetailledDTO(String title, String imgURL, Short annee, List<ActeurFilmDTO> acteurs, List<String> categories) {
+    public FilmDetailledDTO(String title, String imgURL, Short annee, List<ActeurFilmDTO> acteurs, List<String> categories, Boolean fav) {
         this.title = title;
         this.imgURL = imgURL;
         this.annee = annee;
         this.acteurs = acteurs;
         this.categories = categories;
+        this.fav = fav;
     }
 
     public Short getAnnee() {
@@ -59,5 +61,13 @@ public class FilmDetailledDTO {
 
     public void setCategories(List<String> categories) {
         this.categories = categories;
+    }
+
+    public Boolean getFav() {
+        return fav;
+    }
+
+    public void setFav(Boolean fav) {
+        this.fav = fav;
     }
 }
