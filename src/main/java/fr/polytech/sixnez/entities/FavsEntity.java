@@ -4,18 +4,13 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "USER", schema = "sixnez", catalog = "")
-public class UserEntity {
+@Table(name = "FAVS", schema = "sixnez", catalog = "")
+@IdClass(FavsEntityPK.class)
+public class FavsEntity {
     private String username;
-    private String password;
+    private String idFilm;
 
-    public UserEntity() {
-
-    }
-
-    public UserEntity(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public FavsEntity() {
     }
 
     @Id
@@ -28,27 +23,27 @@ public class UserEntity {
         this.username = username;
     }
 
-    @Basic
-    @Column(name = "password", nullable = true, length = 256)
-    public String getPassword() {
-        return password;
+    @Id
+    @Column(name = "id_film", nullable = false, length = 10)
+    public String getIdFilm() {
+        return idFilm;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setIdFilm(String idFilm) {
+        this.idFilm = idFilm;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserEntity that = (UserEntity) o;
+        FavsEntity that = (FavsEntity) o;
         return Objects.equals(username, that.username) &&
-                Objects.equals(password, that.password);
+                Objects.equals(idFilm, that.idFilm);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password);
+        return Objects.hash(username, idFilm);
     }
 }

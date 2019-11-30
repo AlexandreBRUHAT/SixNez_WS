@@ -13,7 +13,7 @@ public class CategorieEntity {
     private GenreEntity genreByGenre;
 
     @Id
-    @Column(name = "ID_film", nullable = false, length = 10)
+    @Column(name = "sixnez", nullable = false, length = 10)
     public String getIdFilm() {
         return idFilm;
     }

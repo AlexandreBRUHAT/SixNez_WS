@@ -10,8 +10,9 @@
         <class>fr.polytech.sixnez.entities.ProfessionEntity</class>
         <class>fr.polytech.sixnez.entities.RoleEntity</class>
         <class>fr.polytech.sixnez.entities.UserEntity</class>
+        <class>fr.polytech.sixnez.entities.FavsEntity</class>
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:mysql://remotemysql.com:3306"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://35.195.25.188:3306/sixnez"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
         </properties>
     </persistence-unit>

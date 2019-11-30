@@ -14,7 +14,7 @@ import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.Optional;
 
-@RestController("/acteurs")
+@RestController
 public class ActeurController {
 
     @Autowired
