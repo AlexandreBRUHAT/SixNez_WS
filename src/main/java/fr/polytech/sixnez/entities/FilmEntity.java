@@ -13,6 +13,7 @@ public class FilmEntity {
     private String image;
     private Collection<CategorieEntity> categoriesByIdFilm;
     private Collection<RoleEntity> rolesByIdFilm;
+    private Collection<FavsEntity> favsByIdFilm;
 
     @Id
     @Column(name = "ID_film" , insertable=false, updatable=false)
@@ -77,6 +78,15 @@ public class FilmEntity {
 
     public void setCategoriesByIdFilm(Collection<CategorieEntity> categoriesByIdFilm) {
         this.categoriesByIdFilm = categoriesByIdFilm;
+    }
+
+    @OneToMany(mappedBy = "filmByIdFilm")
+    public Collection<FavsEntity> getFavsByIdFilm() {
+        return favsByIdFilm;
+    }
+
+    public void setFavsByIdFilm(Collection<FavsEntity> favsByIdFilm) {
+        this.favsByIdFilm = favsByIdFilm;
     }
 
     @OneToMany(mappedBy = "filmByIdFilm")

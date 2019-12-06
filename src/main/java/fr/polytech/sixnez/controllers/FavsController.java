@@ -1,5 +1,6 @@
 package fr.polytech.sixnez.controllers;
 
+import fr.polytech.sixnez.dtos.FilmDTO;
 import fr.polytech.sixnez.dtos.FilmIdDTO;
 import fr.polytech.sixnez.services.FavsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class FavsController {
     }
 
     @GetMapping("/favs")
-    public ResponseEntity<List<FilmIdDTO>> getFavs(Pageable pageable) {
+    public ResponseEntity<List<FilmDTO>> getFavs(Pageable pageable) {
         return new ResponseEntity<>(favsService.getFavs(pageable), HttpStatus.OK);
     }
 }

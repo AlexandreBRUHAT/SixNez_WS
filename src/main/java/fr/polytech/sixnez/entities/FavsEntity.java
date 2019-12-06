@@ -1,6 +1,7 @@
 package fr.polytech.sixnez.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -9,6 +10,7 @@ import java.util.Objects;
 public class FavsEntity {
     private String username;
     private String idFilm;
+    private FilmEntity filmByIdFilm;
 
     public FavsEntity() {
     }
@@ -45,5 +47,15 @@ public class FavsEntity {
     @Override
     public int hashCode() {
         return Objects.hash(username, idFilm);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "ID_film", referencedColumnName = "ID_film", nullable = false, insertable = false, updatable = false)
+    public FilmEntity getFilmByIdFilm() {
+        return filmByIdFilm;
+    }
+
+    public void setFilmByIdFilm(FilmEntity filmByIdFilm) {
+        this.filmByIdFilm = filmByIdFilm;
     }
 }

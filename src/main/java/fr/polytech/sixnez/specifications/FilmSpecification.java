@@ -1,9 +1,6 @@
 package fr.polytech.sixnez.specifications;
 
-import fr.polytech.sixnez.entities.CategorieEntity;
-import fr.polytech.sixnez.entities.FilmEntity;
-import fr.polytech.sixnez.entities.FilmEntity_;
-import fr.polytech.sixnez.entities.GenreEntity_;
+import fr.polytech.sixnez.entities.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +31,17 @@ public class FilmSpecification {
                 }
 
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+            }
+        };
+    }
+
+    public Specification<FilmEntity> getFilmsByFavs(String username) {
+        return new Specification<FilmEntity>() {
+            @Override
+            public Predicate toPredicate(Root<FilmEntity> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                Join<FilmEntity, FavsEntity> favsEntityJoin = root.join(FilmEntity_.FAVS_BY_ID_FILM);
+
+                return criteriaBuilder.equal(favsEntityJoin.get(FavsEntity_.USERNAME), username);
             }
         };
     }
