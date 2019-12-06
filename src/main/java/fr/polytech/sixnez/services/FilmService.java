@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +54,8 @@ public class FilmService {
     }
 
     public List<FilmDTO> getFilms(Pageable page, String genre, String like, int annee) {
+
+        page = PageRequest.of(page.getPageNumber(), page.getPageSize(), Sort.by("annee").descending());
 
         Page<FilmEntity> entities = filmRepository.findAll(filmSpecification.getFilmsByFilters(genre, like, annee), page);
 

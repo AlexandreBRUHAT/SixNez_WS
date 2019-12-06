@@ -30,6 +30,8 @@ public class FilmSpecification {
                     predicates.add(genres.get(GenreEntity_.GENRE).in(genre));
                 }
 
+                predicates.add(criteriaBuilder.lessThan(root.get(FilmEntity_.ANNEE), 2020));
+
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }
         };
