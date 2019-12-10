@@ -59,10 +59,9 @@ public class LoginService {
 
     public String login(String username, String password) {
 
-        password = encoder.encode(password);
-        UserEntity savedUser = userRepository.findByUsernameAndPassword(username, password);
+        UserEntity savedUser = userRepository.findByUsername(username);
 
-        if (savedUser != null) {
+        if (encoder.matches(password, savedUser.getPassword())) {
             return Jwts.builder()
                     .setSubject(username)
                     .signWith(algorithm, key)
