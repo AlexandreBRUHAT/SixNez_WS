@@ -1,5 +1,7 @@
 package fr.polytech.sixnez.dtos;
 
+import fr.polytech.sixnez.entities.FilmEntity;
+
 public class FilmDTO {
 
     private String name;
@@ -7,6 +9,9 @@ public class FilmDTO {
     private String id;
     private Short annee;
     private Boolean fav;
+
+    public FilmDTO() {
+    }
 
     public FilmDTO(String name, String imgURL, String id, Boolean fav, Short annee) {
         this.name = name;

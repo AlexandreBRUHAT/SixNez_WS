@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,15 +35,19 @@ public class LoginService {
 
     private String key;
     private SignatureAlgorithm algorithm;
+    @Autowired
+    private PasswordEncoder encoder;
 
     private long expirationPlus;
 
     public LoginService(UserRepository userRepository,
                         CustomUserDetails userDetails,
-                        AppProperties appProperties) {
+                        AppProperties appProperties,
+                        PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userDetailsService = userDetails;
         this.appProperties = appProperties;
+        this.encoder = passwordEncoder;
 
         expirationPlus = 10_800_000; // 3 hours = 10 800 000 ms
 
@@ -54,9 +59,9 @@ public class LoginService {
 
     public String login(String username, String password) {
 
-        UserEntity savedUser = userRepository.findByUsernameAndPassword(username, password);
+        UserEntity savedUser = userRepository.findByUsername(username);
 
-        if (savedUser != null) {
+        if (encoder.matches(password, savedUser.getPassword())) {
             return Jwts.builder()
                     .setSubject(username)
                     .signWith(algorithm, key)
@@ -74,10 +79,11 @@ public class LoginService {
 
     public void register(String username, String password) {
 
-
         if (userRepository.findByUsername(username) != null) {
             throw new SNException("Username already exists !", HttpStatus.BAD_REQUEST, SpecialCode.LOGIN_USERNAME_ALREADY_EXISTS);
         }
+
+        password = encoder.encode(password);
 
         UserEntity user = new UserEntity(username, password);
         userRepository.save(user);
